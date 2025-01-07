@@ -1,0 +1,333 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Purple to blue gradient */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.feedback-container {
+  padding: 20px;
+  width: 100%; /* Adjust width for responsiveness */
+  max-width: 1000px; /* Limit the maximum width */
+  height: 80vh; /* Occupy 80% of the viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Ensure padding is included in height calculations */
+}
+
+.feedback-card {
+  border-radius: 20px; /* Smooth corners */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff; /* Light gray background */
+  padding: 20px; /* Adjust padding for compactness */
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Take full height of the container */
+
+  box-sizing: border-box; /* Include padding in height/width */
+}
+
+
+.feedback-card-body {
+  padding: 30px;
+  background-color: #ffffff; /* Very light blue for better contrast */
+}
+
+.feedback-heading {
+  margin-top: 50px;
+  font-size: 36px; /* Increase font size for a stronger emphasis */
+  font-weight: 800; /* Make the heading extra bold */
+  text-align: center;
+  color: #1a1a1a; /* Dark gray for a sleek professional look */
+  margin-bottom: 10px; /* Reduced spacing for tighter layout */
+  font-family: 'Poppins', sans-serif; /* Modern and elegant font */
+  letter-spacing: 2px; /* Larger spacing for a clean appearance */
+  text-transform: uppercase; /* Uppercase for branding impact */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.feedback-subtitle {
+  font-size: 20px; /* Larger font size for readability */
+  text-align: center;
+  color: #555555; /* Soft gray for elegance */
+  margin-bottom: 30px;
+  font-family: 'Lora', serif; /* Sophisticated serif font for contrast */
+  font-style: italic; /* Italic for a subtle style */
+  line-height: 1.6; /* Improved readability with more spacing */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.feedback-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.feedback-input-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.feedback-input,
+.feedback-textarea {
+  width: 100%;
+  max-width: 600px;
+  padding: 15px;
+  border: 1px solid #cccccc; /* Light gray border */
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333333;
+  box-sizing: border-box;
+}
+
+.feedback-textarea {
+  resize: none;
+  height: 120px;
+}
+
+.feedback-radio-group {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.feedback-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444444;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.feedback-radio {
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+.feedback-rating-group {
+  margin-bottom: 20px;
+}
+
+.feedback-submit-container {
+  text-align: center;
+}
+
+.feedback-submit-btn {
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient purple to blue */
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right: 10px; /* Spacing between buttons */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+}
+
+.feedback-submit-btn:hover {
+  transform: translateY(-2px);
+}
+
+.feedback-reset-btn {
+  background: linear-gradient(90deg, #ff7f50, #ff4500); /* Gradient coral to orange-red */
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+}
+
+.feedback-reset-btn:hover {
+  transform: translateY(-2px);
+}
+
+.header-image {
+  display: block;
+  margin: 0 auto; /* Centers the image horizontally */
+  width: 100%; /* Ensure the image scales to the card width */
+  max-width: 400px; /* Increase the maximum width */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 400px; /* Set a larger maximum height */
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  object-fit: cover; /* Ensures the image fills its container neatly */
+}
+
+
+@media (max-width: 768px) {
+  .feedback-card {
+    padding: 20px;
+  }
+
+  .feedback-row {
+    flex-direction: column;
+  }
+
+  .feedback-input,
+  .feedback-textarea {
+    max-width: 100%;
+  }
+
+  .header-image {
+    max-width: 100%;
+  }
+}
+
+.star-rating {
+  display: flex;
+  gap: 5px;
+}
+
+.star-rating .active-star {
+  color: #ffc107; /* Filled yellow */
+}
+
+.star-rating .inactive-star {
+  color: transparent; /* Transparent fill */
+  border: 1px solid #ffc107; /* Yellow outline */
+  border-radius: 50%; /* Circular border */
+  padding: 3px;
+}
+
+@media (max-width: 500px) {
+  /* Adjust feedback container */
+  .feedback-container {
+    padding: 10px;
+    height: auto; /* Automatically adjust height */
+    max-height: 100vh; /* Ensure it fits the viewport */
+  }
+
+  /* Adjust feedback card */
+  .feedback-card {
+    padding: 15px;
+    border-radius: 10px; /* Smaller radius for compact look */
+  }
+
+  /* Adjust card body */
+  .feedback-card-body {
+    padding: 15px;
+  }
+
+  /* Adjust heading and subtitle */
+  .feedback-heading {
+    font-size: 24px; /* Smaller font size for heading */
+    margin-top: 20px; /* Reduce spacing */
+  }
+
+  .feedback-subtitle {
+    font-size: 14px; /* Smaller font size for subtitle */
+    margin-bottom: 20px;
+  }
+
+  /* Adjust input fields */
+  .feedback-input,
+  .feedback-textarea {
+    padding: 10px; /* Reduce padding for smaller screens */
+    font-size: 14px; /* Adjust font size */
+  }
+
+  /* Adjust buttons */
+  .feedback-submit-btn,
+  .feedback-reset-btn {
+    font-size: 14px; /* Smaller font size */
+    padding: 8px 15px; /* Adjust padding */
+    width: 100%; /* Full width buttons */
+    margin-bottom: 10px; /* Add spacing between buttons */
+  }
+
+  /* Adjust star rating */
+  .star-rating {
+    gap: 3px; /* Reduce space between stars */
+  }
+
+  /* Adjust radio group */
+  .feedback-radio-group {
+    flex-wrap: wrap; /* Wrap options if needed */
+    gap: 10px; /* Adjust spacing */
+  }
+
+  /* Adjust image */
+  .header-image {
+    max-width: 100%;
+    max-height: 150px; /* Reduce image height */
+    object-fit: contain; /* Ensure the image fits neatly */
+    margin-bottom: 10px; /* Add spacing below the image */
+  }
+}
+@media (max-width: 768px) {
+  
+  .feedback-radio-group {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap */
+    justify-content: space-between; /* Space between buttons */
+    gap: 10px; /* Adds spacing between items */
+    margin-bottom: 20px;
+  }
+
+  .feedback-radio {
+    flex: 1 1 45%; /* Adjust the width of each radio button to take up 45% of the row */
+    text-align: left; /* Align the label to the left */
+    margin-bottom: 10px; /* Add spacing between rows */
+  }
+}
+
+@media (max-width: 500px) {
+  .feedback-radio-group {
+    justify-content: flex-start; /* Align to the left for smaller screens */
+  }
+
+  .feedback-radio {
+    flex: 1 1 100%; /* Each radio button takes full width */
+    margin-bottom: 10px; /* Add spacing between rows */
+  }
+}
+@media (max-width: 768px) {
+  .feedback-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feedback-input-group {
+    width: 100%;
+  }
+
+  .feedback-submit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feedback-submit-btn,
+  .feedback-reset-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  .feedback-radio-group {
+    justify-content: flex-start;
+  }
+
+  .feedback-radio {
+    flex: 1 1 100%;
+    margin-bottom: 10px;
+  }
+
+  .header-image {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+}
