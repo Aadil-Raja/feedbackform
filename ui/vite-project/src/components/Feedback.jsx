@@ -85,8 +85,15 @@ const toggleTheme = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const phonePattern = /^\d{11}$/; // Regex for exactly 11 digits
-    if (!phonePattern.test(formData.phone)) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (formData.phone !="" && !phonePattern.test(formData.phone)) {
       setModalMessage("Phone number must be exactly 11 digits.");
+     
+      setModalOpen(true);
+      return;
+    }
+    if (formData.email !="" && !emailRegex.test(formData.email)) {
+      setModalMessage("Invalid Email.");
      
       setModalOpen(true);
       return;
