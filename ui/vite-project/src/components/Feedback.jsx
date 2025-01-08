@@ -109,7 +109,11 @@ const toggleTheme = () => {
             <MDBRow className="g-0">
               {/* Left Column: image */}
               
-              <MDBCol md="6" className="d-none d-md-block">
+              <MDBCol 
+    xs="12" 
+    md="6" 
+    className="order-1 order-md-1"
+  >
                 <MDBCardImage
                   src="shopping-header2.jpg"
                   alt="Shopping Header"
@@ -123,7 +127,11 @@ const toggleTheme = () => {
               
 
               {/* Right Column: form */}
-              <MDBCol  md="6">
+              <MDBCol 
+    xs="12" 
+    md="6" 
+    className="order-2 order-md-2"
+  >
                 <MDBCardBody className="feedback-card-body">
                  
                   <p className="feedback-subtitle">
