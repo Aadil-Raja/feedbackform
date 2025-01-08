@@ -39,7 +39,7 @@ body {
 }
 
 .feedback-heading {
-  margin-top: 50px;
+  margin-top: 80px;
   font-size: 36px; /* Increase font size for a stronger emphasis */
   font-weight: 800; /* Make the heading extra bold */
   text-align: center;
@@ -154,7 +154,7 @@ body {
 
 .header-image {
   display: block;
-  margin: 0 auto; /* Centers the image horizontally */
+  margin: 30px auto; /* Centers the image horizontally */
   width: 100%; /* Ensure the image scales to the card width */
   max-width: 400px; /* Increase the maximum width */
   height: auto; /* Maintain aspect ratio */
@@ -332,3 +332,19 @@ body {
     margin-bottom: 10px;
   }
 }
+.custom-modal .modal-dialog {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  height: 100vh; /* Full viewport height */
+  
+  margin: 0 auto; /* Center horizontally */
+}
+
+.custom-modal .modal-content {
+  max-width: 500px; /* Optional: Set a maximum width for the modal */
+  width: 80%; /* Make sure the modal fits nicely */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  border-radius: 8px; /* Optional rounded corners */
+}
+

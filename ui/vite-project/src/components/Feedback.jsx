@@ -11,6 +11,12 @@ import {
   MDBRadio,
   MDBInput,
   MDBInputGroup,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalBody,
+  MDBModalFooter,
 } from "mdb-react-ui-kit";
 import "./Feedback.css"; // <-- Your styling
 
@@ -37,6 +43,8 @@ const StarRating = ({ rating, onRatingChange, readOnly = false }) => {
 
 function Feedback() {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+  const [modalOpen, setModalOpen] = useState(false); 
+  const [modalMessage, setModalMessage] = useState("");
   const [theme, setTheme] = useState("light");
   // Same initialFormData as before
   const initialFormData = {
@@ -76,6 +84,13 @@ const toggleTheme = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const phonePattern = /^\d{11}$/; // Regex for exactly 11 digits
+    if (!phonePattern.test(formData.phone)) {
+      setModalMessage("Phone number must be exactly 11 digits.");
+     
+      setModalOpen(true);
+      return;
+    }
     try {
       console.log(formData);
       const response = await fetch(`${BASE_URL}/feedback`, {
@@ -84,15 +99,16 @@ const toggleTheme = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        alert("Feedback submitted successfully!");
+        setModalMessage("Thank you for your valuable feedback");
         setFormData(initialFormData);
       } else {
-        alert("Failed to submit feedback.");
+        setModalMessage("Failed to submit feedback. Please try again.");
       }
     } catch (error) {
       console.error(error);
-      alert("An error occurred while submitting feedback.");
+      setModalMessage("An error occurred while submitting feedback.");
     }
+    setModalOpen(true);
   };
 
   // Layout changed: now split into left image + right form
@@ -115,7 +131,7 @@ const toggleTheme = () => {
     className="order-1 order-md-1"
   >
                 <MDBCardImage
-                  src="shopping-header2.jpg"
+                  src="headerimg.webp"
                   alt="Shopping Header"
                   className="header-image"
                   fluid
@@ -199,7 +215,7 @@ const toggleTheme = () => {
                           type="email"
                           value={formData.email}
                           onChange={handleChange}
-                          required
+                     
                           className="feedback-input"
                         />
                       </MDBInputGroup>
@@ -285,6 +301,26 @@ const toggleTheme = () => {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    <MDBModal open={modalOpen} setShow={setModalOpen} className="custom-modal">
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <h5 className="modal-title">Feedback Submission</h5>
+              <MDBBtn
+                className="btn-close"
+                color="none"
+                onClick={() => setModalOpen(false)}
+              ></MDBBtn>
+            </MDBModalHeader>
+            <MDBModalBody>{modalMessage}</MDBModalBody>
+            <MDBModalFooter>
+              <MDBBtn color="secondary" onClick={() => setModalOpen(false)}>
+                Close
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
     </>
   );
 }
