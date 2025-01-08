@@ -11,24 +11,25 @@ body {
 
 .feedback-container {
   padding: 20px;
-  width: 100%; /* Adjust width for responsiveness */
-  max-width: 1000px; /* Limit the maximum width */
-  height: 80vh; /* Occupy 80% of the viewport height */
+  width: 100%; /* Full width for all screen sizes */
+  max-width: 1000px; /* Maximum width for large screens */
+  min-height: 100vh; /* Ensure full height on small screens */
+  height: auto; /* Adjust height dynamically */
   display: flex;
+  flex-direction: column; /* Stack content vertically */
   justify-content: center;
   align-items: center;
-  box-sizing: border-box; /* Ensure padding is included in height calculations */
+  box-sizing: border-box; /* Include padding in the width/height calculations */
+  overflow-y: auto; !important;/* Enable scrolling for overflow content */
 }
 
 .feedback-card {
+  width: 100%;
+  height: auto; /* Automatically adjust to content height */
+  max-height: 90vh; /* Prevent the card from exceeding the viewport */
+  overflow-y: auto; /* Allow scrolling inside the card if needed */
   border-radius: 20px; /* Smooth corners */
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff; /* Light gray background */
-  padding: 20px; /* Adjust padding for compactness */
-  width: 100%; /* Full width of the container */
-  height: 100%; /* Take full height of the container */
-
-  box-sizing: border-box; /* Include padding in height/width */
+  padding: 20px; /* Reduced padding for compactness */
 }
 
 
