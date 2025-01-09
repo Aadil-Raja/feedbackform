@@ -264,7 +264,7 @@ body {
     margin-bottom: 10px; /* Add spacing below the image */
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 853px) {
   
   .feedback-radio-group {
     display: flex;
@@ -291,7 +291,7 @@ body {
     margin-bottom: 10px; /* Add spacing between rows */
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 853px) {
   .feedback-row {
     flex-direction: column;
     gap: 20px;
