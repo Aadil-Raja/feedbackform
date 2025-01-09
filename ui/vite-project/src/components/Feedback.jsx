@@ -290,29 +290,29 @@ const toggleTheme = () => {
                     </div>
 
                     <div className="form-check my-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="consentCheckbox"
-                          checked={consentChecked}
-                          onChange={() => setConsentChecked(!consentChecked)}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="consentCheckbox"
-                        >
-                          By checking this box, I agree to receive promotional SMS,
-                          WhatsApp messages, and emails from Wig Wam. I have read
-                          and agree to Wig Wam's{" "}
-                          <span
-                            className="text-primary"
-                            style={{ cursor: "pointer", textDecoration: "underline" }}
-                            onClick={() => setPrivacyModalOpen(true)}
-                          >
-                            Privacy Policy.
-                          </span>
-                        </label>
-                      </div>
+  <input
+    type="checkbox"
+    className="form-check-input"
+    id="consentCheckbox"
+    checked={consentChecked}
+    onChange={() => setConsentChecked(!consentChecked)}
+  />
+  <label className="form-check-label" htmlFor="consentCheckbox">
+    By checking this box, I agree to receive promotional SMS, WhatsApp messages, and emails from Wig Wam. I have read and agree to Wig Wam's{" "}
+    <span
+      className="text-primary"
+      style={{ cursor: "pointer", textDecoration: "underline" }}
+      onClick={(e) => {
+        e.preventDefault(); // Prevent any default behavior
+        e.stopPropagation(); // Prevent the click from affecting the checkbox
+        setPrivacyModalOpen(true); // Open the modal
+      }}
+    >
+      Privacy Policy.
+    </span>
+  </label>
+</div>
+
                     {/* Submit + Reset */}
                     <div className="feedback-submit-container">
                       <MDBBtn
