@@ -43,9 +43,11 @@ const StarRating = ({ rating, onRatingChange, readOnly = false }) => {
 
 function Feedback() {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+  const [consentChecked, setConsentChecked] = useState(false);
   const [modalOpen, setModalOpen] = useState(false); 
   const [modalMessage, setModalMessage] = useState("");
   const [theme, setTheme] = useState("light");
+  const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   // Same initialFormData as before
   const initialFormData = {
     firstName: "",
@@ -84,6 +86,7 @@ const toggleTheme = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     const phonePattern = /^\d{11}$/; // Regex for exactly 11 digits
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (formData.phone !="" && !phonePattern.test(formData.phone)) {
@@ -98,12 +101,16 @@ const toggleTheme = () => {
       setModalOpen(true);
       return;
     }
+    const updatedformData = {
+      ...formData,
+      consentChecked: consentChecked, // Add consentChecked explicitly
+    };
     try {
-      console.log(formData);
+      console.log(updatedformData);
       const response = await fetch(`${BASE_URL}/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedformData),
       });
       if (response.ok) {
         setModalMessage("Thank you for your valuable feedback");
@@ -282,6 +289,30 @@ const toggleTheme = () => {
                       />
                     </div>
 
+                    <div className="form-check my-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="consentCheckbox"
+                          checked={consentChecked}
+                          onChange={() => setConsentChecked(!consentChecked)}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="consentCheckbox"
+                        >
+                          By checking this box, I agree to receive promotional SMS,
+                          WhatsApp messages, and emails from Wig Wam. I have read
+                          and agree to Wig Wam's{" "}
+                          <span
+                            className="text-primary"
+                            style={{ cursor: "pointer", textDecoration: "underline" }}
+                            onClick={() => setPrivacyModalOpen(true)}
+                          >
+                            Privacy Policy.
+                          </span>
+                        </label>
+                      </div>
                     {/* Submit + Reset */}
                     <div className="feedback-submit-container">
                       <MDBBtn
@@ -328,6 +359,78 @@ const toggleTheme = () => {
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
+      <MDBModal  open={privacyModalOpen}  setShow={setPrivacyModalOpen} className="privacy-modal">
+  <MDBModalDialog centered>
+    <MDBModalContent className="privacy-modal-content">
+      <MDBModalHeader>
+      
+        <MDBBtn
+          className="btn-close"
+          color="none"
+          onClick={() => setPrivacyModalOpen(false)}
+        ></MDBBtn>
+      </MDBModalHeader>
+      <MDBModalBody className="privacy-modal-body">
+        <h3>*Privacy Policy*</h3>
+        <p>
+          <strong>1. Data Collection</strong>
+          <br />
+          We collect your name, phone number, and email address during the
+          feedback process. This information is used for:
+          <ul>
+            <li>Sending promotional messages and updates.</li>
+            <li>Providing exclusive offers and discounts.</li>
+            <li>
+              Sharing updates about our products, services, and events.
+            </li>
+          </ul>
+        </p>
+        <p>
+          <strong>2. Data Usage</strong>
+          <br />
+          - Your personal information will only be used for the purposes
+          mentioned above. <br />- You may opt out of receiving promotional
+          messages at any time by contacting us or following the unsubscribe
+          instructions in our communications.
+        </p>
+        <p>
+          <strong>3. Data Security</strong>
+          <br />
+          - We are committed to keeping your data secure and confidential.{" "}
+          <br />- Your personal information will not be shared, sold, or
+          disclosed to any third party without your explicit consent, except as
+          required by law.
+        </p>
+        <p>
+          <strong>4. Data Retention</strong>
+          <br />
+          - We retain your data only for as long as necessary to fulfill the
+          purposes for which it was collected.
+        </p>
+        <p>
+          <strong>5. Your Rights</strong>
+          <br />
+          - You have the right to access, update, or delete your personal
+          information. <br />- For any inquiries or requests regarding your
+          data, you can contact us at [insert contact details].
+        </p>
+        <p>
+          <strong>6. Consent</strong>
+          <br />
+          By providing your feedback, phone number, and email address, you
+          consent to our privacy policy and the use of your data as outlined
+          above.
+        </p>
+      </MDBModalBody>
+      <MDBModalFooter>
+        <MDBBtn color="secondary" onClick={() => setPrivacyModalOpen(false)}>
+          Close
+        </MDBBtn>
+      </MDBModalFooter>
+    </MDBModalContent>
+  </MDBModalDialog>
+</MDBModal>
+
     </>
   );
 }
