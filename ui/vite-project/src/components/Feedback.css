@@ -73,6 +73,57 @@ body {
   margin-bottom: 20px;
   width: 100%;
 }
+/* Ensure consistent width for the PhoneInput container */
+.feedback-phone-container {
+  width: 100%; /* Full width to match MDBInputGroup */
+  max-width: 600px !important;
+  
+}
+
+/* Style the PhoneInput input field to match the MDBInput styling */
+.feedback-phone-input {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0.5rem;
+  font-size: 1rem;
+  max-width: 350px;!important
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+/* Align flag dropdown with the input field */
+.react-tel-input .flag-dropdown {
+  background: transparent;
+  border: none;
+  border-right: 1px solid #ced4da;
+  border-radius: 0;
+}
+
+/* Ensure dropdown list matches overall styling */
+.react-tel-input .country-list {
+  max-height: 200px; /* Limit height for better UX */
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Focus effect to match MDBInput */
+.feedback-phone-input:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.feedback-input {
+  height: 40px; /* Adjust this to match your design */
+}
+
+.feedback-input-group .input-group-text {
+  height: 40px !important; /* Match the input height */
+  display: flex;
+  align-items: center;
+}
+
 
 .feedback-input,
 .feedback-textarea {

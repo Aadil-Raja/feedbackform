@@ -19,6 +19,8 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 import "./Feedback.css"; // <-- Your styling
+import "react-phone-input-2/lib/style.css"
+import PhoneInput from "react-phone-input-2"
 
 // StarRating component (unchanged)
 const StarRating = ({ rating, onRatingChange, readOnly = false }) => {
@@ -66,7 +68,9 @@ function Feedback() {
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
-
+  const handlePhoneChange = (value) => {
+    setFormData({ ...formData, phone: value });
+  };
 const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
@@ -87,14 +91,14 @@ const toggleTheme = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const phonePattern = /^\d{11}$/; // Regex for exactly 11 digits
+    //const phonePattern = /^\d{11}$/; // Regex for exactly 11 digits
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (formData.phone !="" && !phonePattern.test(formData.phone)) {
-      setModalMessage("Phone number must be exactly 11 digits.");
+    // if (formData.phone !="" && !phonePattern.test(formData.phone)) {
+    //   setModalMessage("Phone number must be exactly 11 digits.");
      
-      setModalOpen(true);
-      return;
-    }
+    //   setModalOpen(true);
+    //   return;
+    // }
     if (formData.email !="" && !emailRegex.test(formData.email)) {
       setModalMessage("Invalid Email.");
      
@@ -203,9 +207,39 @@ const toggleTheme = () => {
                         </MDBInputGroup>
                       </MDBCol>
                     </MDBRow>
+                   
 
                     <MDBRow>
-                      <MDBInputGroup
+  {/* Phone Number Input */}
+  <div className="feedback-input-group">
+    <PhoneInput
+      country={"us"}
+      value={formData.phone}
+      onChange={(value) => setFormData({ ...formData, phone: value })}
+      inputClass="feedback-phone-input"
+      containerClass="feedback-phone-container"
+    />
+  </div>
+
+  {/* Email Input */}
+  <MDBInputGroup
+    textBefore={<MDBIcon fas icon="envelope" />}
+    className="feedback-input-group"
+  >
+    <MDBInput
+      label="Email"
+      name="email"
+      type="email"
+      value={formData.email}
+      onChange={handleChange}
+      className="feedback-input"
+    />
+  </MDBInputGroup>
+</MDBRow>
+
+                   
+                     
+                      {/* <MDBInputGroup
                         textBefore={<MDBIcon fas icon="mobile-screen" />}
                         className="feedback-input-group"
                       >
@@ -217,23 +251,7 @@ const toggleTheme = () => {
                           onChange={handleChange}
                           className="feedback-input"
                         />
-                      </MDBInputGroup>
-
-                      <MDBInputGroup
-                        textBefore={<MDBIcon fas icon="envelope" />}
-                        className="feedback-input-group"
-                      >
-                        <MDBInput
-                          label="Email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                     
-                          className="feedback-input"
-                        />
-                      </MDBInputGroup>
-                    </MDBRow>
+                      </MDBInputGroup> */}
 
                     {/* Example rating field */}
                     <div className="feedback-rating-group">
