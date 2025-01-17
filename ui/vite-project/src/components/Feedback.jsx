@@ -17,6 +17,7 @@ import {
   MDBModalHeader,
   MDBModalBody,
   MDBModalFooter,
+  MDBCheckbox,
 } from "mdb-react-ui-kit";
 import "./Feedback.css"; // <-- Your styling
 import "react-phone-input-2/lib/style.css"
@@ -59,6 +60,10 @@ function Feedback() {
     shoppingAmbiance:0,
     staffFriendliness:0,
     shoppingVariety:"",
+    preferences: {
+      email: false,
+      whatsapp: false,
+      sms: false,}
 
   };
 
@@ -87,9 +92,31 @@ const toggleTheme = () => {
   const handleRatingChange = (field, newRating) => {
     setFormData({ ...formData, [field]: newRating });
   };
-
+ // Handle change for checkboxes
+ const handleCheckboxChange = (e) => {
+  const { name, checked } = e.target;
+  setFormData((prev) => ({
+    ...prev,
+    preferences: {
+      ...prev.preferences,
+      [name]: checked,
+    },
+  }));
+};
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      consentChecked &&
+      !(
+        formData.preferences.email ||
+        formData.preferences.whatsapp ||
+        formData.preferences.sms
+      )
+    ) {
+      setModalMessage("Please select at least one communication preference.");
+      setModalOpen(true);
+      return;
+    }
     
     //const phonePattern = /^\d{11}$/; // Regex for exactly 11 digits
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -105,10 +132,30 @@ const toggleTheme = () => {
       setModalOpen(true);
       return;
     }
+
+    if (formData.shoppingVariety === "") {
+      setModalMessage("Please select a Shopping Variety.");
+      setModalOpen(true);
+      return;
+    }
+    
+    if (formData.shoppingAmbiance === 0) {
+      setModalMessage("Please rate the Shopping Ambiance.");
+      setModalOpen(true);
+      return;
+    }
+    
+    if (formData.staffFriendliness === 0) {
+      setModalMessage("Please rate the Staff Friendliness.");
+      setModalOpen(true);
+      return;
+    }
+    
     const updatedformData = {
       ...formData,
       consentChecked: consentChecked, // Add consentChecked explicitly
     };
+
     try {
       console.log(updatedformData);
       const response = await fetch(`${BASE_URL}/feedback`, {
@@ -156,6 +203,10 @@ const toggleTheme = () => {
                 />
                <h2 className="feedback-heading">WIGWAM</h2>
                <h5 className="feedback-subtitle">Your Fashion Choice</h5>
+               <p className="feedback-subtitle">
+                    Please share your feedback to help us improve your shopping
+                    experience.
+                  </p>
 
               </MDBCol>
               
@@ -168,10 +219,7 @@ const toggleTheme = () => {
   >
                 <MDBCardBody className="feedback-card-body">
                  
-                  <p className="feedback-subtitle">
-                    Please share your feedback to help us improve your shopping
-                    experience.
-                  </p>
+                 
 
                   <form onSubmit={handleSubmit} className="feedback-form">
                     <MDBRow>
@@ -313,7 +361,24 @@ const toggleTheme = () => {
     className="form-check-input"
     id="consentCheckbox"
     checked={consentChecked}
-    onChange={() => setConsentChecked(!consentChecked)}
+    onChange={() => {
+      // Toggle consentChecked state
+      const newConsentState = !consentChecked;
+      setConsentChecked(newConsentState);
+  
+      // Reset preferences if consent is unchecked
+      if (!newConsentState) {
+        setFormData({
+          ...formData,
+          preferences: {
+            ...formData.preferences,
+            email: false,
+            whatsapp: false,
+            sms: false,
+          },
+        });
+      }
+    }}
   />
   <label className="form-check-label" htmlFor="consentCheckbox">
     By checking this box, I agree to receive promotional SMS, WhatsApp messages, and emails from Wig Wam. I have read and agree to Wig Wam's{" "}
@@ -330,6 +395,31 @@ const toggleTheme = () => {
     </span>
   </label>
 </div>
+
+<div className="mt-3 feedback-checkbox-group">
+                        
+                        <MDBCheckbox
+                          label="Email"
+                          name="email"
+                          disabled={!consentChecked}
+                          checked={formData.preferences.email}
+                          onChange={handleCheckboxChange}
+                        />
+                        <MDBCheckbox
+                          label="WhatsApp"
+                          name="whatsapp"
+                          disabled={!consentChecked}
+                          checked={formData.preferences.whatsapp}
+                          onChange={handleCheckboxChange}
+                        />
+                        <MDBCheckbox
+                          label="SMS"
+                          name="sms"
+                          disabled={!consentChecked}
+                          checked={formData.preferences.sms}
+                          onChange={handleCheckboxChange}
+                        />
+                      </div>
 
                     {/* Submit + Reset */}
                     <div className="feedback-submit-container">

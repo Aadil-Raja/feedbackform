@@ -9,16 +9,21 @@ exports.submitFeedback = async (req, res) => {
     email,
     shoppingAmbiance,
     staffFriendliness,
-    shoppingVariety 
-    ,consentChecked,// Will validate against ENUM values
+    shoppingVariety,
+    consentChecked,
+    preferences, // Extract preferences object
   } = req.body;
+
+  // Destructure preferences to extract individual fields
+  const { email: receiveEmail, whatsapp: receiveWhatsApp, sms: receiveSMS } = preferences;
 
   const query = `
     INSERT INTO Feedback (
       firstName, lastName, phone, email, 
-      shoppingAmbiance, staffFriendliness, shoppingVariety, consentChecked
+      shoppingAmbiance, staffFriendliness, shoppingVariety, 
+      consentChecked, receiveEmail, receiveWhatsApp, receiveSMS
     ) 
-    VALUES (?, ?, ?, ?, ?, ?, ?,?)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const values = [
@@ -28,7 +33,11 @@ exports.submitFeedback = async (req, res) => {
     email,
     shoppingAmbiance,
     staffFriendliness,
-    shoppingVariety,consentChecked
+    shoppingVariety,
+    consentChecked,
+    receiveEmail,
+    receiveWhatsApp,
+    receiveSMS,
   ];
 
   try {

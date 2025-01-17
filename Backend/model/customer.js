@@ -6,12 +6,15 @@ exports.createFeedbackTable = async () => {
       feedback_id INT AUTO_INCREMENT PRIMARY KEY,
       firstName VARCHAR(255) NOT NULL,
       lastName VARCHAR(255) NOT NULL,
-      phone VARCHAR(20),
-      email VARCHAR(255) NOT NULL,
+      phone VARCHAR(20) default NULL,
+      email VARCHAR(255) default NULL,
       shoppingAmbiance INT NOT NULL DEFAULT 0,
       staffFriendliness INT NOT NULL DEFAULT 0,
       shoppingVariety ENUM('Excellent', 'Good', 'Average', 'Poor') NOT NULL,
-       consentChecked BOOLEAN NOT NULL DEFAULT FALSE,
+      consentChecked BOOLEAN NOT NULL DEFAULT FALSE,
+      receiveEmail BOOLEAN NOT NULL DEFAULT FALSE,
+      receiveWhatsApp BOOLEAN NOT NULL DEFAULT FALSE,
+      receiveSMS BOOLEAN NOT NULL DEFAULT FALSE,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
