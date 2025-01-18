@@ -60,6 +60,7 @@ function Feedback() {
     shoppingAmbiance:0,
     staffFriendliness:0,
     shoppingVariety:"",
+    consentChecked :false,
     preferences: {
       email: false,
       whatsapp: false,
@@ -166,6 +167,7 @@ const toggleTheme = () => {
       if (response.ok) {
         setModalMessage("Thank you for your valuable feedback");
         setFormData(initialFormData);
+        setConsentChecked(false);
       } else {
         setModalMessage("Failed to submit feedback. Please try again.");
       }
@@ -356,30 +358,36 @@ const toggleTheme = () => {
                     </div>
 
                     <div className="form-check my-3">
-  <input
-    type="checkbox"
-    className="form-check-input"
-    id="consentCheckbox"
-    checked={consentChecked}
-    onChange={() => {
-      // Toggle consentChecked state
-      const newConsentState = !consentChecked;
-      setConsentChecked(newConsentState);
-  
-      // Reset preferences if consent is unchecked
-      if (!newConsentState) {
-        setFormData({
-          ...formData,
-          preferences: {
-            ...formData.preferences,
-            email: false,
-            whatsapp: false,
-            sms: false,
-          },
-        });
-      }
-    }}
-  />
+                    <input
+  type="checkbox"
+  className="form-check-input"
+  id="consentCheckbox"
+  checked={consentChecked}
+  onChange={() => {
+    const newConsentState = !consentChecked; // Calculate the new state beforehand
+
+    // Update consentChecked state
+    setConsentChecked(newConsentState);
+
+    // Set preferences based on the new state
+    setFormData({
+      ...formData,
+      preferences: {
+        email: newConsentState, // Set all preferences to the new state
+        whatsapp: newConsentState,
+        sms: newConsentState,
+      },
+    });
+
+    console.log("New Consent State:", newConsentState);
+    console.log("Updated Preferences:", {
+      email: newConsentState,
+      whatsapp: newConsentState,
+      sms: newConsentState,
+    });
+  }}
+/>
+
   <label className="form-check-label" htmlFor="consentCheckbox">
     By checking this box, I agree to receive promotional SMS, WhatsApp messages, and emails from Wig Wam. I have read and agree to Wig Wam's{" "}
     <span
