@@ -263,7 +263,7 @@ const toggleTheme = () => {
   {/* Phone Number Input */}
   <div className="feedback-input-group">
     <PhoneInput
-      country={"us"}
+      country={"gb"}
       value={formData.phone}
       onChange={(value) => setFormData({ ...formData, phone: value })}
       inputClass="feedback-phone-input"
@@ -305,7 +305,7 @@ const toggleTheme = () => {
 
                     {/* Example rating field */}
                     <div className="feedback-rating-group">
-                      <label className="feedback-label">Shopping Ambiance</label>
+                      <label className="feedback-label">Shopping Ambience</label>
                       <StarRating
                         rating={formData.shoppingAmbiance}
                         onRatingChange={(rating) =>
@@ -358,7 +358,7 @@ const toggleTheme = () => {
                     </div>
 
                     <div className="form-check my-3">
-                    <input
+<input
   type="checkbox"
   className="form-check-input"
   id="consentCheckbox"
@@ -389,7 +389,7 @@ const toggleTheme = () => {
 />
 
   <label className="form-check-label" htmlFor="consentCheckbox">
-    By checking this box, I agree to receive promotional SMS, WhatsApp messages, and emails from Wig Wam. I have read and agree to Wig Wam's{" "}
+  By ticking this box, I agree to receiving promotional text messages, WhatsApps and emails from Wigwam. I have read and agree to Wigwam's {" "}
     <span
       className="text-primary"
       style={{ cursor: "pointer", textDecoration: "underline" }}
@@ -421,7 +421,7 @@ const toggleTheme = () => {
                           onChange={handleCheckboxChange}
                         />
                         <MDBCheckbox
-                          label="SMS"
+                          label="Text messages"
                           name="sms"
                           disabled={!consentChecked}
                           checked={formData.preferences.sms}

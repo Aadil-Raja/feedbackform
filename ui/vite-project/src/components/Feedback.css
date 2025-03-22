@@ -397,6 +397,8 @@ body {
     margin-bottom: 10px;
   }
 }
+
+
 .custom-modal .modal-dialog {
   display: flex;
   align-items: center; /* Center vertically */
