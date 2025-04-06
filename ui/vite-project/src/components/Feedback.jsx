@@ -524,11 +524,9 @@ const toggleTheme = () => {
           purposes for which it was collected.
         </p>
         <p>
-          <strong>5. Your Rights</strong>
+          <strong>5. Data Preferences</strong>
           <br />
-          - You have the right to access, update, or delete your personal
-          information. <br />- For any inquiries or requests regarding your
-          data, you can contact us at [insert contact details].
+          If you wish to unsubscribe or have any query, you can contact us at +44 1253 290910. We’ll be happy to assist you..
         </p>
         <p>
           <strong>6. Consent</strong>
