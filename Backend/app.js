@@ -3,6 +3,7 @@ const express = require('express');
 const { submitFeedback } = require('./controller/customer.js');
 const { createFeedbackTable } = require('./model/customer.js');
 const { handleLogin } = require('./controller/Login.js');
+const {getAllFeedback} = require('./controller/getFeedback.js');
 const verifyToken = require('./middleware/auth.js');
 const app = express();
 app.use(cors()); // Enable CORS for all routes
@@ -20,6 +21,7 @@ app.get('/api/verify_token', verifyToken, (req, res) => {
   res.status(200).json({ message: `Welcome ${req.user.username}! This is your dashboard.` });
 });
 
+app.get('/feedback', getAllFeedback);
 app.listen(process.env.PORT, () => {
   console.log('Server is running on port 3000');
 });

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Feedback from "./components/Feedback";
 import Login from "./components/Login/Login";
 import ProtectedRouteWigwam from "./components/utils/ProtectedRoute";
-
+import FeedbackPage from "./components/dashboard/dashboard";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
@@ -14,6 +14,7 @@ function App() {
         {/* Public Route */}
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Login />} />
+        <Route path="/view-feedback" element={<FeedbackPage />} />
 
         {/* Protected Routes Wrapper */}
         <Route element={<ProtectedRouteWigwam />}>
