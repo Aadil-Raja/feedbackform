@@ -12,7 +12,7 @@ const FeedbackPage = () => {
 
   const fetchFeedback = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/feedback`);
+      const response = await axios.get(`${BASE_URL}/getfeedback`);
       setFeedbackData(response.data.feedback);
     } catch (err) {
       console.error(err);
