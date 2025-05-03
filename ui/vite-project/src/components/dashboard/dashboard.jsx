@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './dashboard.css'; // renamed or created with correct styles
 
 const FeedbackPage = () => {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -8,11 +9,11 @@ const FeedbackPage = () => {
   const [feedbackData, setFeedbackData] = useState([]);
   const [error, setError] = useState('');
 
-  const correctPassword = 'admin123'; // CHANGE THIS
+  const correctPassword = 'admin123';
 
   const fetchFeedback = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/getfeedback`);
+      const response = await axios.get(`${BASE_URL}/api/getfeedback`);
       setFeedbackData(response.data.feedback);
     } catch (err) {
       console.error(err);
@@ -38,29 +39,30 @@ const FeedbackPage = () => {
 
   if (!authenticated) {
     return (
-      <div style={{ padding: '2rem' }}>
+      <div className="dashboard-container">
         <h2>Enter Password to View Feedback</h2>
         <form onSubmit={handleSubmit}>
           <input
+            className="dashboard-input"
             type="password"
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Submit</button>
+          <button className="dashboard-button" type="submit">Submit</button>
         </form>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="dashboard-error">{error}</p>}
       </div>
     );
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="dashboard-container">
       <h2>Feedback Records</h2>
       {feedbackData.length === 0 ? (
         <p>No feedback available.</p>
       ) : (
-        <table border="1" cellPadding="10">
+        <table className="dashboard-table">
           <thead>
             <tr>
               <th>Name</th>
